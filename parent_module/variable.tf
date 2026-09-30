@@ -7,3 +7,11 @@ variable "nics" {}
 variable "vms" {}
 variable "load_balancers" {}
 variable "bastions" {}
+variable "routes" {}
+variable "peering" {}
+variable "key_vault" {}
+variable "postgresql" {}
+variable "private_endpoint" {}
+variable "storage" {}
+variable "container" {}
+variable "blob" {}

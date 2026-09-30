@@ -13,6 +13,13 @@ vnets = {
     address_space       = ["10.0.0.0/16"]
 
   }
+  vnet2 = {
+    name                = "vnet-269"
+    location            = "centralindia"
+    resource_group_name = "rg-26"
+    address_space       = ["10.1.0.0/16"]
+
+  }
 }
 
 subnets = {
@@ -27,6 +34,13 @@ subnets = {
     resource_group_name  = "rg-26"
     virtual_network_name = "vnet-26"
     address_prefixes     = ["10.0.2.0/26"]
+  }
+
+  subnet3 = {
+    name                 = "keyvaultsubnet"
+    resource_group_name  = "rg-26"
+    virtual_network_name = "vnet-26"
+    address_prefixes     = ["10.0.3.0/26"]
   }
 }
 
@@ -67,7 +81,7 @@ nics = {
     resource_group_name  = "rg-26"
     subnet               = "subnet26"
     virtual_network_name = "vnet-26"
-    pip_name             = "publicip26"
+
   }
 }
 
@@ -104,5 +118,100 @@ bastions = {
   }
 }
 
+routes = {
+  route1 = {
+    name                   = "routetable"
+    location               = "centralindia"
+    resource_group_name    = "rg-26"
+    routename              = "route1"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.2.4"
 
+  }
+}
+
+peering = {
+  peering1 = {
+
+    name                 = "vnet1tovnet2"
+    resource_group_name  = "rg-26"
+    virtual_network_name = "vnet-26"
+    vnet                 = "vnet-269"
+  }
+
+  peering2 = {
+
+    name                 = "vnet2tovnet1"
+    resource_group_name  = "rg-26"
+    virtual_network_name = "vnet-269"
+    vnet                 = "vnet-26"
+  }
+}
+
+key_vault = {
+  key_vault1 = {
+    name                = "keyvault827380"
+    location            = "centralindia"
+    resource_group_name = "rg-26"
+
+  }
+}
+
+postgresql = {
+  postgresql1 = {
+
+    server_name            = "postgresqldatabase"
+    resource_group_name    = "rg-26"
+    location               = "centralindia"
+    administrator_login    = "adminuser"
+    administrator_password = "adminuser@098"
+    database_name          = "postgrsdb"
+
+
+  }
+}
+
+private_endpoint = {
+  pe1 = {
+    name                 = "privateendpoint"
+    location             = "centralindia"
+    resource_group_name  = "rg-26"
+    private_connection   = "keyvault_connection"
+    key_vault            = "keyvault827380"
+    subnet               = "keyvaultsubnet"
+    virtual_network_name = "vnet-26"
+
+  }
+}
+
+storage = {
+  storage1 = {
+
+    name                     = "storage827380"
+    resource_group_name      = "rg-26"
+    location                 = "centralindia"
+    account_tier             = "Standard"
+    account_replication_type = "LRS"
+  }
+}
+container = {
+  container1 = {
+    name                  = "contaiertf"
+    container_access_type = "private"
+    storage               = "storage827380"
+    resource_group_name   = "rg-26"
+  }
+}
+
+blob = {
+  blob1 = {
+    blob_name           = "blobs26"
+    type                = "Block"
+    source              = "D:/Gautam Folder/ADO-Pipeline/Terraform_practice/some-local-file.zip"
+    storage             = "storage827380"
+    resource_group_name = "rg-26"
+    container           = "contaiertf"
+  }
+}
 
