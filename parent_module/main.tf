@@ -111,3 +111,10 @@ module "blob" {
   blob       = var.blob
 
 }
+
+module "azurerm_firewall" {
+  depends_on = [ module.subnets, module.public_ip, module.rgs ]
+  source = "../child_module/Azure_firewall"
+  firewall = var.firewall
+  
+}

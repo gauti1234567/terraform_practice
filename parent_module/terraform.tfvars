@@ -42,6 +42,13 @@ subnets = {
     virtual_network_name = "vnet-26"
     address_prefixes     = ["10.0.3.0/26"]
   }
+
+  subnet4 = {
+    name                 = "AzureFirewallSubnet"
+    resource_group_name  = "rg-26"
+    virtual_network_name = "vnet-26"
+    address_prefixes     = ["10.0.4.0/26"]
+  }
 }
 
 pips = {
@@ -215,3 +222,17 @@ blob = {
   }
 }
 
+firewall = {
+  firewall1 ={
+  name                = "azurefirewall"
+  location            = "centralindia"
+  resource_group_name = "rg-26"
+  sku_name            = "AZFW_VNet"
+  sku_tier            = "Standard"
+  ip_configuration    = "configuration"
+  subnet              = "AzureFirewallSubnet"
+  virtual_network_name= "vnet-26"
+  public_ip           = "publicip26"
+
+  }
+}

@@ -15,3 +15,4 @@ variable "private_endpoint" {}
 variable "storage" {}
 variable "container" {}
 variable "blob" {}
+variable "firewall" {}
